@@ -7,12 +7,48 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .eslintignore .",
+    "lint:fix": "eslint --fix --ext \".ts,.js,.vue\" --ignore-path .eslintignore .",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest",
+    "release": "release-it"
+  },
+  "dependencies": {
+    "pinia": "^2.1.7"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/eslint-config": "^0.2.0",
+    "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
+    "@pinia/nuxt": "^0.5.1",
+    "@types/node": "^20.8.7",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "@vue/test-utils": "^2.4.1",
+    "@vueuse/components": "^10.5.0",
+    "@vueuse/core": "^10.5.0",
+    "@vueuse/nuxt": "^10.5.0",
+    "eslint": "^8.51.0",
+    "eslint-plugin-vitest": "^0.3.8",
+    "happy-dom": "^12.9.1",
     "nuxt": "^3.8.0",
-    "vue": "^3.3.4",
+    "release-it": "^16.2.1",
+    "tailwindcss": "^3.3.3",
+    "vitest": "^0.34.6",
+    "vue": "^3.3.5",
     "vue-router": "^4.2.5"
+  },
+  "release-it": {
+    "github": {
+      "release": true,
+      "releaseName": "v${version}"
+    },
+    "git": {
+      "commitMessage": "chore(release): release v${version}"
+    }
   }
 }
