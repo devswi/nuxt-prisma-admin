@@ -15,18 +15,23 @@
     "release": "release-it"
   },
   "dependencies": {
+    "@nuxt/ui": "^2.9.0",
+    "bcryptjs": "^2.4.3",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
     "pinia": "^2.1.7"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
-    "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxt/image": "^1.0.0",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/tailwindcss": "^6.8.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
     "@pinia/nuxt": "^0.5.1",
     "@prisma/client": "5.4.2",
-    "@types/node": "^20.8.7",
+    "@types/bcryptjs": "^2.4.5",
+    "@types/js-cookie": "^3.0.5",
+    "@types/jsonwebtoken": "^9.0.4",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vitest/coverage-v8": "^0.34.6",
     "@vue/test-utils": "^2.4.1",
@@ -40,7 +45,8 @@
     "prisma": "^5.4.2",
     "release-it": "^16.2.1",
     "tailwindcss": "^3.3.3",
-    "ts-node": "^10.9.1",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2",
     "vitest": "^0.34.6",
     "vue": "^3.3.5",
     "vue-router": "^4.2.5"
@@ -53,5 +59,9 @@
     "git": {
       "commitMessage": "chore(release): release v${version}"
     }
+  },
+  "prisma": {
+    "schema": "server/database/schema.prisma",
+    "seed": "tsx server/database/seed.ts"
   }
 }

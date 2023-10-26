@@ -18,6 +18,7 @@ module.exports = {
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'array-element-newline': ['error', { multiline: true, minItems: 3 }],
     'array-bracket-newline': ['error', { multiline: true }],
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
     // Typescript
     '@typescript-eslint/type-annotation-spacing': 'error',

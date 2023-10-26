@@ -1,0 +1,60 @@
+<script setup lang="ts">
+definePageMeta({
+  layout: 'blank',
+})
+
+const form = ref({
+  username: '',
+  password: '',
+  rememberMe: true,
+})
+
+const passwordVisible = ref(false)
+
+const inputType = computed(() => (passwordVisible.value ? 'text' : 'password'))
+const eyeIcon = computed(() => passwordVisible.value ? 'i-heroicons-eye-slash-solid' : 'i-heroicons-eye-solid')
+
+const handleLogin = async () => {
+  const { password, ...rest } = form.value
+  console.log('other', rest)
+}
+</script>
+
+<template>
+  <div class="min-h-screen flex flex-col items-center justify-center">
+    <NuxtImg class="mb-24" src="/logo.png" />
+    <div class="flex flex-col w-80">
+      <UInput
+        v-model="form.username"
+        class="mb-6"
+        size="md"
+        placeholder="Username"
+        icon="i-heroicons-user-circle-solid"
+      />
+      <UInput
+        v-model="form.password"
+        class="mb-3.5"
+        size="md"
+        placeholder="Password"
+        icon="i-heroicons-lock-closed-solid"
+        :ui="{ icon: { trailing: { pointer: '' } } }"
+        :type="inputType"
+      >
+        <template #trailing>
+          <UButton
+            v-show="form.password !== ''"
+            color="gray"
+            variant="link"
+            :icon="eyeIcon"
+            :padded="false"
+            @click="passwordVisible = !passwordVisible"
+          />
+        </template>
+      </UInput>
+      <UCheckbox v-model="form.rememberMe" class="mb-7" label="Remember Me" />
+      <UButton size="md" block @click="handleLogin">
+        Login
+      </UButton>
+    </div>
+  </div>
+</template>
