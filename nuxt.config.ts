@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     ),
     jwtSecret: process.env.JWT_SECRET || 'superdupersecret',
   },
-  srcDir: 'src/',
   modules: [
     '@nuxt/ui',
     '@pinia/nuxt',
@@ -28,6 +27,7 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   devServer: {
+    host: 'local.admin.com',
     port: 4000,
   },
 })

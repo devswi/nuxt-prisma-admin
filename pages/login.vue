@@ -3,10 +3,17 @@ definePageMeta({
   layout: 'blank',
 })
 
-const form = ref({
-  username: '',
-  password: '',
-  rememberMe: true,
+const currentUser = useAuthUser()
+const isAdmin = useAdmin()
+const { login } = useAuth()
+
+const form = reactive({
+  data: {
+    username: '',
+    password: '',
+    rememberMe: true,
+  },
+  pending: false,
 })
 
 const passwordVisible = ref(false)
@@ -14,9 +21,21 @@ const passwordVisible = ref(false)
 const inputType = computed(() => (passwordVisible.value ? 'text' : 'password'))
 const eyeIcon = computed(() => passwordVisible.value ? 'i-heroicons-eye-slash-solid' : 'i-heroicons-eye-solid')
 
+const handleLoginSuccess = async () => {
+  const redirect = isAdmin.value ? '/admin' : '/'
+  await navigateTo(redirect)
+}
+
 const handleLogin = async () => {
-  const { password, ...rest } = form.value
-  console.log('other', rest)
+  try {
+    form.pending = true
+    await login(form.data.username, form.data.password, form.data.rememberMe)
+    await handleLoginSuccess()
+  } catch (error) {
+    console.error(error)
+  } finally {
+    form.pending = false
+  }
 }
 </script>
 
@@ -25,14 +44,14 @@ const handleLogin = async () => {
     <NuxtImg class="mb-24" src="/logo.png" />
     <div class="flex flex-col w-80">
       <UInput
-        v-model="form.username"
+        v-model="form.data.username"
         class="mb-6"
         size="md"
         placeholder="Username"
         icon="i-heroicons-user-circle-solid"
       />
       <UInput
-        v-model="form.password"
+        v-model="form.data.password"
         class="mb-3.5"
         size="md"
         placeholder="Password"
@@ -42,7 +61,7 @@ const handleLogin = async () => {
       >
         <template #trailing>
           <UButton
-            v-show="form.password !== ''"
+            v-show="form.data.password !== ''"
             color="gray"
             variant="link"
             :icon="eyeIcon"
@@ -51,8 +70,13 @@ const handleLogin = async () => {
           />
         </template>
       </UInput>
-      <UCheckbox v-model="form.rememberMe" class="mb-7" label="Remember Me" />
-      <UButton size="md" block @click="handleLogin">
+      <UCheckbox v-model="form.data.rememberMe" class="mb-7" label="Remember Me" />
+      <UButton
+        size="md"
+        block
+        :loading="form.pending"
+        @click="handleLogin"
+      >
         Login
       </UButton>
     </div>

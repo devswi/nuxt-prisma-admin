@@ -19,9 +19,20 @@ module.exports = {
     'array-element-newline': ['error', { multiline: true, minItems: 3 }],
     'array-bracket-newline': ['error', { multiline: true }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
+    // -- import --
+    'import/order': 'error',
+    'import/first': 'error',
+    'import/no-mutable-exports': 'error',
+    'import/no-unresolved': 'off',
+    'import/no-absolute-path': 'off',
+    'import/no-named-as-default-member': 'off',
+    'import/no-named-as-default': 'off',
+    'import/namespace': 'off',
 
     // Typescript
     '@typescript-eslint/type-annotation-spacing': 'error',
+    '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
 
     // Vuejs
     'vue/multi-word-component-names': 0,
