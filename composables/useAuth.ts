@@ -18,7 +18,6 @@ export const useAuth = () => {
         rememberMe,
       },
     })
-
     setUser(res.user)
   }
 
@@ -27,6 +26,9 @@ export const useAuth = () => {
       method: 'POST',
     })
     setUser(null)
+    navigateTo({
+      name: 'login',
+    })
   }
 
   /**

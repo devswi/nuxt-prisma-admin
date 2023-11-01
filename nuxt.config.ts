@@ -3,6 +3,7 @@ const ONE_WEEK = ONE_DAY * 7
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  css: ['~/assets/css/root.css'],
   runtimeConfig: {
     cookieName: process.env.COOKIE_NAME || '__token',
     cookieExpires: parseInt(
@@ -24,6 +25,9 @@ export default defineNuxtConfig({
   ],
   image: {
     dir: 'assets/images',
+  },
+  ui: {
+    icons: ['mdi', 'heroicons'],
   },
   devtools: { enabled: true },
   devServer: {
