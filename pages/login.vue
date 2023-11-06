@@ -3,6 +3,7 @@ definePageMeta({
   layout: 'blank',
 })
 
+const colorMode = useColorMode()
 const currentUser = useAuthUser()
 const isAdmin = useAdmin()
 const { login } = useAuth()
@@ -20,6 +21,7 @@ const passwordVisible = ref(false)
 
 const inputType = computed(() => (passwordVisible.value ? 'text' : 'password'))
 const eyeIcon = computed(() => passwordVisible.value ? 'i-heroicons-eye-slash-solid' : 'i-heroicons-eye-solid')
+const logo = computed(() => colorMode.value === 'dark' ? '/logo-dark.png' : '/logo.png')
 
 const handleLoginSuccess = async () => {
   const redirect = isAdmin.value ? '/admin' : '/'
@@ -40,8 +42,8 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center">
-    <NuxtImg class="mb-24" src="/logo.png" />
+  <div class="h-screen flex flex-col items-center justify-center">
+    <NuxtImg class="mb-24" :src="logo" />
     <div class="flex flex-col w-80">
       <UInput
         v-model="form.data.username"

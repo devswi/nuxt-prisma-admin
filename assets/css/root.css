@@ -1,3 +1,9 @@
 :root {
   --header-height: 4rem;
+  --sidebar-width: 15rem;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
 }

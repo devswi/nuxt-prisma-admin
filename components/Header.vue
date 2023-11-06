@@ -19,8 +19,8 @@ const openGithub = () => {
 </script>
 
 <template>
-  <header class="text-gray-700 dark:text-white sticky top-0 left-0 right-0 border-b border-b-gray-200 dark:border-b-gray-800 z-100 ">
-    <div class="h-[var(--header-height)] flex items-center justify-between px-3.5">
+  <header class="sticky top-0 text-gray-700 dark:text-white border-b border-b-gray-200 dark:border-b-gray-800 z-100 ">
+    <div class="h-[var(--header-height)] flex items-center justify-between px-3.5 bg-white dark:bg-gray-900">
       <NuxtImg class="w-40" :src="logo" />
       <div class="flex items-center gap-2">
         <UButton variant="ghost" color="gray" :icon="darkModeIcon" size="md" @click="switchDarkMode" />

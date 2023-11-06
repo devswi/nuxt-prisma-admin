@@ -21,6 +21,7 @@
     "pinia": "^2.1.7"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.1.55",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/image": "^1.0.0",

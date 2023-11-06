@@ -29,6 +29,9 @@ export default defineNuxtConfig({
   ui: {
     icons: ['mdi', 'heroicons'],
   },
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+  },
   devtools: { enabled: true },
   devServer: {
     host: 'local.admin.com',

@@ -1,9 +1,5 @@
 <template>
-  <main class="min-h-screen dark:bg-gray-900 dark:text-white">
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-
-    <UNotifications />
-  </main>
+  <NuxtLayout class="bg-white dark:bg-gray-900">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
