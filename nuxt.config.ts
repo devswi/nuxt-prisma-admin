@@ -31,6 +31,7 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
+    classPrefix: '',
   },
   devtools: { enabled: true },
   devServer: {

@@ -7,7 +7,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   width: 1,
-  height: 24,
+  height: 32,
 })
 
 const style = computed(() => ({
