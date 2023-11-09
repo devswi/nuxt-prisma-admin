@@ -28,12 +28,7 @@ const openGithub = () => {
         <UButton icon="i-heroicons-bell-solid" />
         <UButton icon="i-mdi-github" @click="openGithub" />
         <VerticalSeparator />
-        <UPopover mode="hover">
-          <UButton icon="i-heroicons-user-circle-solid" />
-          <template #panel>
-            <ProfilePanel />
-          </template>
-        </UPopover>
+        <ProfilePopover />
       </div>
     </div>
   </header>

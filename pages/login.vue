@@ -74,8 +74,9 @@ const handleLogin = async () => {
       </UInput>
       <UCheckbox v-model="form.data.rememberMe" class="mb-7" label="Remember Me" />
       <UButton
-        size="md"
         block
+        color="primary"
+        variant="solid"
         :loading="form.pending"
         @click="handleLogin"
       >

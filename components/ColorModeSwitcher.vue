@@ -32,16 +32,11 @@ const options: Option[] = [
     value: 'system',
   },
 ]
-
-const handleModifyColorMode = (mode: 'system' | 'light' | 'dark') => {
-  colorMode.preference = mode
-  open.value = !open.value
-}
 </script>
 
 <template>
   <ClientOnly>
-    <UPopover :open="open">
+    <UPopover mode="hover">
       <UButton :icon="dynamicIcon" @click="open = !open" />
       <template #fallback>
         <UButton icon="i-heroicons-computer-desktop-solid" />
@@ -53,7 +48,7 @@ const handleModifyColorMode = (mode: 'system' | 'light' | 'dark') => {
             :key="option.label"
             :color="option.value === $colorMode.preference ? 'primary' : 'gray'"
             :icon="option.icon"
-            @click="handleModifyColorMode(option.value)"
+            @click="$colorMode.preference = option.value"
           >
             {{ option.label }}
           </UButton>
