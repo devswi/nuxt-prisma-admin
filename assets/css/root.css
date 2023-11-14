@@ -1,10 +1,13 @@
 :root {
   --header-height: 4rem;
   --sidebar-width: 15rem;
+
+}
+
+.dark {
 }
 
 body {
   height: 100vh;
   overflow: hidden;
 }
-
