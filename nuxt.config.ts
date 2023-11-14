@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     dir: 'assets/images',
   },
   ui: {
-    icons: ['mdi', 'heroicons'],
+    icons: ['heroicons', 'mdi'],
   },
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
