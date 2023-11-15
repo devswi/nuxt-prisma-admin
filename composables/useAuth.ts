@@ -10,7 +10,7 @@ export const useAuth = () => {
   }
 
   const login = async (username: string, password: string, rememberMe: boolean) => {
-    const res = await $fetch<{ user: User}>('/auth/login', {
+    const res = await $fetch<{ user: User }>('/auth/login', {
       method: 'POST',
       body: {
         username,
@@ -37,7 +37,7 @@ export const useAuth = () => {
   const currentUser = async () => {
     if (!authUser.value) {
       try {
-        const data = await $fetch<{ user: User}>('/auth/current', {
+        const data = await $fetch<{ user: User }>('/auth/current', {
           headers: useRequestHeaders(['cookie']) as HeadersInit,
         })
         setUser(data.user)

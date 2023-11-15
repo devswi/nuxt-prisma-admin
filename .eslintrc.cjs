@@ -33,6 +33,7 @@ module.exports = {
     // Typescript
     '@typescript-eslint/type-annotation-spacing': 'error',
     '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
+    '@typescript-eslint/object-curly-spacing': ['error', 'always'],
 
     // Vuejs
     'vue/multi-word-component-names': 0,

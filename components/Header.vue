@@ -15,7 +15,7 @@ const openGithub = () => {
       <!-- position of popover was incorrect because of backdrop-blur -->
       <div class="absolute inset-0 bg-white/75 dark:bg-gray-900/75 backdrop-blur" />
       <UInput
-        class="relative"
+        class="relative w-[240px]"
         color="gray"
         variant="none"
         size="md"

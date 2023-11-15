@@ -6,12 +6,7 @@ const prisma = new PrismaClient()
 const userData = [
   {
     username: 'admin',
-    role: 0,
     password: 'adminadmin',
-  },
-  {
-    username: 'test',
-    password: 'testtest',
   },
 ]
 

@@ -4,7 +4,7 @@ enum Role {
 }
 
 interface User {
-  id: string
+  id: number
   email: string
   username: string
   nickname: string
