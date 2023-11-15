@@ -64,5 +64,11 @@ module.exports = {
       },
     ],
     'vue/padding-line-between-blocks': ['error', 'always'],
+    'vue/component-tags-order': [
+      'error',
+      {
+        order: [['script', 'template'], 'style'],
+      },
+    ],
   },
 }
