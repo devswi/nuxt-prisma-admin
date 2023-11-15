@@ -122,6 +122,8 @@ const handleMenuClick = (item: NavigationItemWithState) => {
       openedItems.value = props.multiple ? [...openedItems.value, item.id] : [item.id]
     }
   } else {
+    // clear the opened items
+    openedItems.value = []
     // navigate to the route
     navigateTo(item.to)
   }
