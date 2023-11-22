@@ -1,20 +1,33 @@
 <script setup lang="ts">
+import type { FormError, FormErrorEvent, FormSubmitEvent } from '#ui/types'
+
 definePageMeta({
   layout: 'blank',
 })
 
-const currentUser = useAuthUser()
+interface Form {
+  username: string
+  password: string
+  rememberMe: boolean
+  pending: boolean
+}
+
 const isAdmin = useAdmin()
 const { login } = useAuth()
 
-const form = reactive({
-  data: {
-    username: '',
-    password: '',
-    rememberMe: true,
-  },
+const state = reactive<Form>({
+  username: '',
+  password: '',
+  rememberMe: true,
   pending: false,
 })
+
+const validate = (state: Form): FormError[] => {
+  const errors = []
+  if (!state.username) { errors.push({ path: 'username', message: 'Required' }) }
+  if (!state.password) { errors.push({ path: 'password', message: 'Required' }) }
+  return errors
+}
 
 const passwordVisible = ref(false)
 
@@ -26,15 +39,15 @@ const handleLoginSuccess = async () => {
   await navigateTo(redirect)
 }
 
-const handleLogin = async () => {
+async function onSubmit (_: FormSubmitEvent<any>) {
   try {
-    form.pending = true
-    await login(form.data.username, form.data.password, form.data.rememberMe)
+    state.pending = true
+    await login(state.username, state.password, state.rememberMe)
     await handleLoginSuccess()
   } catch (error) {
     console.error(error)
   } finally {
-    form.pending = false
+    state.pending = false
   }
 }
 </script>
@@ -48,43 +61,51 @@ const handleLogin = async () => {
       </svg>
     </div>
     <div class="flex flex-col w-80">
-      <UInput
-        v-model="form.data.username"
-        class="mb-6"
-        size="md"
-        placeholder="Username"
-        icon="i-heroicons-user-circle-solid"
-      />
-      <UInput
-        v-model="form.data.password"
-        class="mb-3.5"
-        size="md"
-        placeholder="Password"
-        icon="i-heroicons-lock-closed-solid"
-        :ui="{ icon: { trailing: { pointer: '' } } }"
-        :type="inputType"
-      >
-        <template #trailing>
-          <UButton
-            v-show="form.data.password !== ''"
-            color="gray"
-            variant="link"
-            :icon="eyeIcon"
-            :padded="false"
-            @click="passwordVisible = !passwordVisible"
+      <UForm :state="state" :validate="validate" class="space-y-4" @submit="onSubmit">
+        <UFormGroup name="username">
+          <UInput
+            v-model="state.username"
+            size="md"
+            placeholder="Username"
+            autocomplete="username"
+            icon="i-heroicons-user-circle-solid"
           />
-        </template>
-      </UInput>
-      <UCheckbox v-model="form.data.rememberMe" class="mb-7" label="Remember Me" />
-      <UButton
-        block
-        color="primary"
-        variant="solid"
-        :loading="form.pending"
-        @click="handleLogin"
-      >
-        Login
-      </UButton>
+        </UFormGroup>
+        <UFormGroup name="password">
+          <UInput
+            v-model="state.password"
+            size="md"
+            placeholder="Password"
+            icon="i-heroicons-lock-closed-solid"
+            autocomplete
+            :ui="{ icon: { trailing: { pointer: '' } } }"
+            :type="inputType"
+          >
+            <template #trailing>
+              <UButton
+                v-show="state.password !== ''"
+                color="gray"
+                variant="link"
+                :icon="eyeIcon"
+                :padded="false"
+                @click="passwordVisible = !passwordVisible"
+              />
+            </template>
+          </UInput>
+        </UFormGroup>
+        <UFormGroup name="rememberMe">
+          <UCheckbox v-model="state.rememberMe" class="mb-7" label="Remember Me" />
+        </UFormGroup>
+        <UButton
+          block
+          color="primary"
+          variant="solid"
+          type="submit"
+          :loading="state.pending"
+        >
+          Login
+        </UButton>
+      </UForm>
     </div>
   </div>
 </template>
