@@ -41,16 +41,17 @@ model user_role {
 }
 
 model menu {
-  id        String      @id @default(dbgenerated("nanoid(5, 'abcdefghijklmnopqrstuvwxyz')")) @db.Char(5)
-  name      String      @unique @db.VarChar(50)
-  url       String?     @db.VarChar(255)
-  icon      String      @db.VarChar(50)
-  create_at DateTime    @default(now())
-  update_at DateTime    @updatedAt
-  menu_role menu_role[]
-  parent_id String?     @db.Char(5)
-  parent    menu?       @relation("menu_parent", fields: [parent_id], references: [id])
-  children  menu[]      @relation("menu_parent")
+  id          String      @id @default(dbgenerated("nanoid(5, 'abcdefghijklmnopqrstuvwxyz')")) @db.Char(5)
+  title       String      @unique @db.VarChar(50)
+  url         String?     @db.VarChar(255)
+  description String?     @db.VarChar(255)
+  icon        String?     @db.VarChar(50)
+  create_at   DateTime    @default(now())
+  update_at   DateTime    @updatedAt
+  parent_id   String?     @db.Char(5)
+  parent      menu?       @relation("menu_parent", fields: [parent_id], references: [id])
+  children    menu[]      @relation("menu_parent")
+  menu_role   menu_role[]
 }
 
 model menu_role {
