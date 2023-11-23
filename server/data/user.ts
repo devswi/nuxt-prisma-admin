@@ -1,6 +1,6 @@
 import prisma from './client'
 
-export async function getUserById (id: number) {
+export async function getUserById (id: string) {
   return await prisma.user.findUnique({
     where: {
       id,
