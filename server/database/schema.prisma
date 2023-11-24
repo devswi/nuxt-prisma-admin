@@ -35,7 +35,7 @@ model role {
 model user_role {
   id      String @id @default(dbgenerated("nanoid(5, 'abcdefghijklmnopqrstuvwxyz')")) @db.Char(5)
   user_id String @db.Char(5)
-  user    user   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user    user   @relation(fields: [user_id], references: [id])
   role_id String @db.Char(5)
   role    role   @relation(fields: [role_id], references: [id])
 }
@@ -57,7 +57,7 @@ model menu {
 model menu_role {
   id      String @id @default(dbgenerated("nanoid(5, 'abcdefghijklmnopqrstuvwxyz')")) @db.Char(5)
   menu_id String @db.Char(5)
-  menu    menu   @relation(fields: [menu_id], references: [id], onDelete: Cascade)
+  menu    menu   @relation(fields: [menu_id], references: [id])
   role_id String @db.Char(5)
   role    role   @relation(fields: [role_id], references: [id])
 }
