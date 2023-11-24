@@ -1,6 +1,7 @@
-enum Role {
-  Admin,
-  User
+interface  Role {
+  id: string
+  name: 'ADMIN' | 'USER'
+  description?: string
 }
 
 interface User {
@@ -9,13 +10,14 @@ interface User {
   username: string
   nickname: string
   phone: string
-  role: Role
+  roles: Role[]
 }
 
 declare global {
   export { Role }
 
   export type {
-    User
+    User,
+    Role
   }
 }

@@ -3,6 +3,6 @@ export const useAdmin = () => {
 
   return computed(() => {
     if (!authUser.value) { return false }
-    return authUser.value.role === 0
+    return authUser.value.roles.some(role => role.name === 'ADMIN')
   })
 }
