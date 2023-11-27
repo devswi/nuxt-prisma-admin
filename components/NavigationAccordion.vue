@@ -1,58 +1,10 @@
-<template>
-  <div class="flex flex-col">
-    <template v-for="item in items" :key="item.id">
-      <UButton :color="route.path === item.to ? 'primary' : 'gray'" @click="handleMenuClick(item)">
-        <template #leading>
-          <UIcon :name="item.icon" class="w-5 h-5" />
-        </template>
-        <span class="truncate">{{ item.label }}</span>
-        <template v-if="item.children.length > 0" #trailing>
-          <UIcon
-            name="i-heroicons-chevron-right-20-solid"
-            class="w-5 h-5 ms-auto transform transition-transform duration-200"
-            :class="[item.open && 'rotate-90']"
-          />
-        </template>
-      </UButton>
-
-      <Transition
-        v-bind="{
-          enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
-          leaveActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out'
-        }"
-        @enter="onEnter"
-        @after-enter="onAfterEnter"
-        @before-leave="onBeforeLeave"
-        @leave="onLeave"
-      >
-        <div v-show="item.open">
-          <div class="pt-1.5 pb-3">
-            <nav class="ml-[1.375rem] border-s border-gray-200 dark:border-gray-800 space-y-2">
-              <UButton
-                v-for="child in item.children"
-                :key="child.id"
-                class="group p-0 py-1 ps-4 block w-full text-left -ms-px border-s dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-500 text-gray-500 dark:text-gray-400 bg-transparent dark:bg-transparent hover:bg-transparent dark:hover:bg-transparent font-normal"
-                :class="[route.path === child.to && 'text-primary dark:text-primary hover:text-primary dark:hover:text-primary border-current dark:border-current hover:border-current dark:hover:border-current']"
-                :ui="{ rounded: 'rounded-none' }"
-                @click="navigateTo(child.to)"
-              >
-                {{ child.label }}
-              </UButton>
-            </nav>
-          </div>
-        </div>
-      </Transition>
-    </template>
-  </div>
-</template>
-
 <script setup lang="ts">
 export interface NavigationItem {
   id: string
-  label: string
+  title: string
   icon: string
   children: Omit<NavigationItem, 'icon' | 'children'>[]
-  to?: string
+  url?: string
 }
 
 interface Props {
@@ -81,7 +33,7 @@ const items = computed<NavigationItemWithState[]>(() => {
       }
     })
     // check if the route.path is in the children
-    const open = openedItems.value.includes(other.id) || children.some(child => child.to === route.path)
+    const open = openedItems.value.includes(other.id) || children.some(child => child.url === route.path)
     return {
       ...other,
       children,
@@ -125,7 +77,55 @@ const handleMenuClick = (item: NavigationItemWithState) => {
     // clear the opened items
     openedItems.value = []
     // navigate to the route
-    navigateTo(item.to)
+    navigateTo(item.url)
   }
 }
 </script>
+
+<template>
+  <div class="flex flex-col">
+    <template v-for="item in items" :key="item.id">
+      <UButton :color="route.path === item.url ? 'primary' : 'gray'" @click="handleMenuClick(item)">
+        <template #leading>
+          <UIcon :name="item.icon" class="w-5 h-5" />
+        </template>
+        <span class="truncate">{{ item.title }}</span>
+        <template v-if="item.children.length > 0" #trailing>
+          <UIcon
+            name="i-heroicons-chevron-right-20-solid"
+            class="w-5 h-5 ms-auto transform transition-transform duration-200"
+            :class="[item.open && 'rotate-90']"
+          />
+        </template>
+      </UButton>
+
+      <Transition
+        v-bind="{
+          enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
+          leaveActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out'
+        }"
+        @enter="onEnter"
+        @after-enter="onAfterEnter"
+        @before-leave="onBeforeLeave"
+        @leave="onLeave"
+      >
+        <div v-show="item.open">
+          <div class="pt-1.5 pb-3">
+            <nav class="ml-[1.375rem] border-s border-gray-200 dark:border-gray-800 space-y-2">
+              <UButton
+                v-for="child in item.children"
+                :key="child.id"
+                class="group p-0 py-1 ps-4 block w-full text-left -ms-px border-s dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-500 text-gray-500 dark:text-gray-400 bg-transparent dark:bg-transparent hover:bg-transparent dark:hover:bg-transparent font-normal"
+                :class="[route.path === child.url && 'text-primary dark:text-primary hover:text-primary dark:hover:text-primary border-current dark:border-current hover:border-current dark:hover:border-current']"
+                :ui="{ rounded: 'rounded-none' }"
+                @click="navigateTo(child.url)"
+              >
+                {{ child.title }}
+              </UButton>
+            </nav>
+          </div>
+        </div>
+      </Transition>
+    </template>
+  </div>
+</template>

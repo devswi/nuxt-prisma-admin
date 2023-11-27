@@ -1,64 +1,14 @@
 <script setup lang="ts">
-import { v4 as uuidv4 } from 'uuid'
 import type { NavigationItem } from '@/components/NavigationAccordion.vue'
 
-const items: NavigationItem[] = [
-  {
-    id: uuidv4(),
-    label: 'Dashboard',
-    icon: 'i-heroicons-squares-2x2-solid',
-    children: [],
-    to: '/admin',
-  },
-  {
-    id: uuidv4(),
-    label: 'Authority',
-    icon: 'i-heroicons-cube-solid',
-    children: [
-      {
-        id: uuidv4(),
-        label: 'User',
-        to: '/admin/users',
-      },
-      {
-        id: uuidv4(),
-        label: 'Role',
-        to: '/admin/roles',
-      },
-    ],
-  },
-  {
-    id: uuidv4(),
-    label: 'System',
-    icon: 'i-heroicons-cog-6-tooth-solid',
-    children: [
-      {
-        id: uuidv4(),
-        label: 'Settings',
-        to: '/admin/settings',
-      },
-      {
-        id: uuidv4(),
-        label: 'Data Table',
-        to: '/admin/data-table',
-      },
-    ],
-  },
-  {
-    id: uuidv4(),
-    label: 'Chart',
-    icon: 'i-heroicons-chart-pie-solid',
-    children: [],
-    to: '/admin/charts',
-  },
-  {
-    id: uuidv4(),
-    label: 'Components',
-    icon: 'i-heroicons-rectangle-group-solid',
-    children: [],
-    to: '/admin/components',
-  },
-]
+const menus = ref<NavigationItem[]>([])
+
+onMounted(async () => {
+  const { objects } = await $fetch<{ objects: NavigationItem[] }>('/menus', {
+    method: 'GET',
+  })
+  menus.value = objects
+})
 </script>
 
 <template>
@@ -74,7 +24,7 @@ const items: NavigationItem[] = [
       </div>
     </div>
     <div class="pt-2.5 px-4">
-      <NavigationAccordion :items="items" />
+      <NavigationAccordion :items="menus" />
     </div>
   </nav>
 </template>

@@ -26,7 +26,7 @@ const menus = [
         url: '/admin/roles',
       },
       {
-        title: 'menu',
+        title: 'Menu',
         url: '/admin/menus',
       },
     ],
