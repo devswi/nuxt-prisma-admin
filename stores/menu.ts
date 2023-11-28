@@ -1,23 +1,22 @@
 import { defineStore } from 'pinia'
 
-export const useMenuStore = defineStore('menu', () => {
-  const menus = ref<Menu[]>([])
+interface State {
+  menus: Menu[]
+}
 
-  const fetchMenus = async () => {
-    const { objects } = await $fetch<{ objects: Menu[] }>('/menus', {
-      method: 'GET',
-    })
-    menus.value = objects
-  }
-
-  onMounted(() => {
-    fetchMenus()
-  })
-
-  return {
-    menus,
-  }
-},
-{
+export const useMenuStore = defineStore('menu', {
+  state: (): State => {
+    return {
+      menus: [],
+    }
+  },
+  actions: {
+    async fetchMenus () {
+      const { objects } = await $fetch<{ objects: Menu[] }>('/menus', {
+        method: 'GET',
+      })
+      this.menus = objects
+    },
+  },
   persist: true,
 })
