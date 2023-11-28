@@ -1,18 +1,10 @@
 <script setup lang="ts">
-export interface NavigationItem {
-  id: string
-  title: string
-  icon: string
-  children: Omit<NavigationItem, 'icon' | 'children'>[]
-  url?: string
-}
-
 interface Props {
-  items: NavigationItem[]
+  items: Menu[]
   multiple?: boolean
 }
 
-interface NavigationItemWithState extends NavigationItem {
+interface NavigationItemWithState extends Menu {
   open: boolean
 }
 

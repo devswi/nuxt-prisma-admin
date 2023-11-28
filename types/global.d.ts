@@ -13,11 +13,19 @@ interface User {
   roles: Role[]
 }
 
+ interface Menu {
+  id: string
+  title: string
+  icon: string
+  children: Omit<NavigationItem, 'icon' | 'children'>[]
+  url?: string
+}
+
 declare global {
-  export { Role }
 
   export type {
     User,
-    Role
+    Role,
+    Menu,
   }
 }

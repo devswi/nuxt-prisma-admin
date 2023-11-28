@@ -22,7 +22,6 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@iconify-json/mdi": "^1.1.55",
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/image": "^1.0.0",

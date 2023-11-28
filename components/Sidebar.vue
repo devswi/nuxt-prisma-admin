@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import type { NavigationItem } from '@/components/NavigationAccordion.vue'
+import { useMenuStore } from '@/stores/menu'
 
-const menus = ref<NavigationItem[]>([])
+const menu = useMenuStore()
 
-onMounted(async () => {
-  const { objects } = await $fetch<{ objects: NavigationItem[] }>('/menus', {
-    method: 'GET',
-  })
-  menus.value = objects
-})
 </script>
 
 <template>
@@ -24,7 +18,7 @@ onMounted(async () => {
       </div>
     </div>
     <div class="pt-2.5 px-4">
-      <NavigationAccordion :items="menus" />
+      <NavigationAccordion :items="menu.menus" />
     </div>
   </nav>
 </template>

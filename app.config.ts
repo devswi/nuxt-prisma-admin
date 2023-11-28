@@ -13,5 +13,8 @@ export default defineAppConfig({
         color: 'gray',
       },
     },
+    icons: {
+      dynamic: true,
+    },
   },
 })
