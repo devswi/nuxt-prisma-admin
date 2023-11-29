@@ -1,19 +1,8 @@
 import prisma from './client'
+import { getRolesByUserId } from './role'
 
 export async function getUserById (id: string) {
-  const records = await prisma.user_role.findMany({
-    where: {
-      user_id: id,
-    },
-  })
-  // fetch roles
-  const roles = await prisma.role.findMany({
-    where: {
-      id: {
-        in: records.map(record => record.role_id),
-      },
-    },
-  })
+  const roles = await getRolesByUserId(id)
   const user = await prisma.user.findUnique({
     where: {
       id,
@@ -26,9 +15,16 @@ export async function getUserById (id: string) {
 }
 
 export async function getUserByUsername (username: string) {
-  return await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       username,
     },
   })
+  if (!user) { return null }
+  const { id } = user
+  const roles = await getRolesByUserId(id)
+  return {
+    ...user,
+    roles,
+  }
 }
