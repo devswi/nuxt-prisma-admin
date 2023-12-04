@@ -3,6 +3,7 @@ const ONE_WEEK = ONE_DAY * 7
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   css: ['~/assets/css/root.css'],
   runtimeConfig: {
     cookieName: process.env.COOKIE_NAME || '__token',
@@ -17,17 +18,20 @@ export default defineNuxtConfig({
     jwtSecret: process.env.JWT_SECRET || 'superdupersecret',
   },
   modules: [
-    '@nuxt/ui',
+    '@element-plus/nuxt',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@vueuse/nuxt',
+    'nuxt-icon',
+    '@nuxtjs/color-mode',
     '@nuxt/image',
   ],
+  elementPlus: {
+    icon: 'ElIcon',
+    themes: ['dark'],
+  },
   image: {
     dir: 'assets/images',
-  },
-  ui: {
-    icons: ['heroicons'],
   },
   colorMode: {
     preference: 'system', // default value of $colorMode.preference

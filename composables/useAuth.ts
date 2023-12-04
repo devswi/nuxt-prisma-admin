@@ -1,5 +1,6 @@
 export const useAuth = () => {
   const authUser = useAuthUser()
+  const menus = useMenuStore()
 
   const setUser = (user: User | null) => {
     authUser.value = user
@@ -26,6 +27,8 @@ export const useAuth = () => {
       method: 'POST',
     })
     setUser(null)
+    // reset menus
+    menus.reset()
     navigateTo({
       name: 'login',
     })

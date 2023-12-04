@@ -20,9 +20,9 @@ export async function getMenus (roles: Role[]) {
   //
   // 1. find all root menus
   const rootMenus = records.filter(record => !record.parent_id)
-  // 2. find all children menus
+  // 2. find all children
   const childrenMenus = records.filter(record => record.parent_id)
-  // 3. map root menus to tree
+  // 3. config root menus
   rootMenus.forEach((root) => {
     return {
       ...root,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormError, FormErrorEvent, FormSubmitEvent } from '#ui/types'
+import type { FormError, FormSubmitEvent } from '#ui/types'
 
 definePageMeta({
   layout: 'blank',
@@ -14,6 +14,7 @@ interface Form {
 
 const isAdmin = useAdmin()
 const { login } = useAuth()
+const { fetchMenus } = useMenuStore()
 
 const state = reactive<Form>({
   username: '',
@@ -43,6 +44,8 @@ async function onSubmit (_: FormSubmitEvent<any>) {
   try {
     state.pending = true
     await login(state.username, state.password, state.rememberMe)
+    // fetch menus
+    await fetchMenus()
     await handleLoginSuccess()
   } catch (error) {
     console.error(error)
