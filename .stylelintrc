@@ -1,11 +1,25 @@
 {
-  "extends": "stylelint-config-recommended-vue",
+  "extends": [
+    "stylelint-config-recommended-vue",
+    "stylelint-config-standard-scss"
+  ],
   "rules": {
     "indentation": [
       2,
       {
         "baseIndentLevel": 1
       }
-    ]
-  }
+    ],
+    "at-rule-empty-line-before": "always"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.vue",
+        "**/*.ts",
+        "**/*.js"
+      ],
+      "customSyntax": "postcss-html"
+    }
+  ]
 }

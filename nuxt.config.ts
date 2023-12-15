@@ -3,8 +3,23 @@ const ONE_WEEK = ONE_DAY * 7
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
-  css: ['~/assets/css/root.css'],
+  app: {
+    // head
+    head: {
+      title: 'Nuxt Admin',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Nuxt + Vue3 admin website',
+        },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    },
+  },
+  ssr: true,
+  css: ['@/assets/scss/index.scss'],
   runtimeConfig: {
     cookieName: process.env.COOKIE_NAME || '__token',
     cookieExpires: parseInt(
@@ -18,24 +33,35 @@ export default defineNuxtConfig({
     jwtSecret: process.env.JWT_SECRET || 'superdupersecret',
   },
   modules: [
-    '@element-plus/nuxt',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@vueuse/nuxt',
     'nuxt-icon',
-    '@nuxtjs/color-mode',
     '@nuxt/image',
+    '@nuxtjs/tailwindcss',
+    '@element-plus/nuxt',
+    '@nuxtjs/color-mode',
   ],
   elementPlus: {
     icon: 'ElIcon',
+    importStyle: 'scss',
     themes: ['dark'],
+  },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/element/index.scss" as element;',
+        },
+      },
+    },
   },
   image: {
     dir: 'assets/images',
   },
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
-    classPrefix: '',
+    classSuffix: '',
   },
   devtools: { enabled: true },
   devServer: {

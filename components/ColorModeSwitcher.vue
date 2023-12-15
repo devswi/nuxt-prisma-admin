@@ -4,7 +4,7 @@ const open = ref(false)
 
 const dynamicIcon = computed(() => {
   const value = colorMode.preference === 'system' ? colorMode.value : colorMode.preference
-  return `i-heroicons-${value === 'dark' ? 'moon' : 'sun'}-solid`
+  return `heroicons:${value === 'dark' ? 'moon' : 'sun'}`
 })
 
 type ColorMode = 'system' | 'light' | 'dark'
@@ -36,24 +36,19 @@ const options: Option[] = [
 
 <template>
   <ClientOnly>
-    <UPopover mode="hover">
-      <UButton :icon="dynamicIcon" @click="open = !open" />
-      <template #fallback>
-        <UButton icon="i-heroicons-computer-desktop-solid" />
+    <ElPopover trigger="hover">
+      <template #reference>
+        <ElButton>
+          <Icon :name="dynamicIcon" />
+        </ElButton>
       </template>
-      <template #panel>
+      <template #default>
         <div class="py-2 flex flex-col w-32">
-          <UButton
-            v-for="option in options"
-            :key="option.label"
-            :color="option.value === $colorMode.preference ? 'primary' : 'gray'"
-            :icon="option.icon"
-            @click="$colorMode.preference = option.value"
-          >
+          <ElButton v-for="option in options" :key="option.value" @click="$colorMode.preference = option.value">
             {{ option.label }}
-          </UButton>
+          </ElButton>
         </div>
       </template>
-    </UPopover>
+    </ElPopover>
   </ClientOnly>
 </template>
