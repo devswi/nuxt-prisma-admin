@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { PrismaClient } from '@prisma/client'
 import { hashPasswoard } from '../utils/encryption'
 
@@ -38,7 +39,7 @@ const userData = {
   password: 'adminadmin',
 }
 
-async function main () {
+async function main() {
   console.log('Start seeding...')
   console.log('Seeding roles...')
   const role = await prisma.role.create({

@@ -1,3 +1,3 @@
-export const useAuthUser = () => {
+export function useAuthUser() {
   return useState<User | null>('user', () => null)
 }

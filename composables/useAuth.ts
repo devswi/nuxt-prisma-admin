@@ -1,4 +1,4 @@
-export const useAuth = () => {
+export function useAuth() {
   const authUser = useAuthUser()
   const menus = useMenuStore()
 
@@ -44,7 +44,8 @@ export const useAuth = () => {
           headers: useRequestHeaders(['cookie']) as HeadersInit,
         })
         setUser(data.user)
-      } catch (error) {
+      }
+      catch (error) {
         setCookie(null)
       }
     }

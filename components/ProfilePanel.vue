@@ -1,10 +1,11 @@
 <script setup lang="ts">
 const { logout } = useAuth()
 
-const handleLogout = async () => {
+async function handleLogout() {
   try {
     await logout()
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error)
   }
 }

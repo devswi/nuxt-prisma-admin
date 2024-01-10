@@ -10,7 +10,25 @@
         "baseIndentLevel": 1
       }
     ],
-    "at-rule-empty-line-before": "always"
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "after-same-name"
+        ],
+        "ignore": [
+          "after-comment"
+        ]
+      }
+    ],
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind"
+        ]
+      }
+    ]
   },
   "overrides": [
     {

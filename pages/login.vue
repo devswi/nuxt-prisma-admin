@@ -39,21 +39,22 @@ const rules = computed<FormRules<RuleForm>>(() => ({
   },
 }))
 
-const handleLoginSuccess = async () => {
+async function handleLoginSuccess() {
   const redirect = isAdmin.value ? '/admin' : '/'
   await navigateTo(redirect)
 }
 
-const onSubmit = async () => {
+async function onSubmit() {
   try {
     await formRef.value?.validate()
     form.pending = true
     await login(form.username, form.password, form.rememberMe)
     await fetchMenus()
     await handleLoginSuccess()
-  } catch (error) {
-    console.log('error', error)
-  } finally {
+  }
+  catch (error) {
+  }
+  finally {
     form.pending = false
   }
 }

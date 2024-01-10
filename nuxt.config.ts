@@ -22,11 +22,11 @@ export default defineNuxtConfig({
   css: ['@/assets/scss/index.scss'],
   runtimeConfig: {
     cookieName: process.env.COOKIE_NAME || '__token',
-    cookieExpires: parseInt(
+    cookieExpires: Number.parseInt(
       process.env.COOKIE_EXPIRES || ONE_DAY.toString(),
       10,
     ),
-    cookieRememberMeExpires: parseInt(
+    cookieRememberMeExpires: Number.parseInt(
       process.env.COOKIE_REMEMBER_ME_EXPIRES || ONE_WEEK.toString(),
       10,
     ),

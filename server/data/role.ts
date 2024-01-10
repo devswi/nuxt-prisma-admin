@@ -1,6 +1,6 @@
 import prisma from './client'
 
-export async function getRolesByUserId (userId: string) {
+export async function getRolesByUserId(userId: string) {
   const records = await prisma.user_role.findMany({
     where: {
       user_id: userId,

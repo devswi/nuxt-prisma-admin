@@ -5,8 +5,8 @@ services:
     image: postgres:16.1
     restart: always
     environment:
-      TZ: 'Asia/Shanghai'
-      PGTZ: 'Asia/Shanghai'
+      TZ: Asia/Shanghai
+      PGTZ: Asia/Shanghai
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}

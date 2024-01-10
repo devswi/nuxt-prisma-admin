@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
-const open = ref(false)
+const _open = ref(false)
 
 const dynamicIcon = computed(() => {
   const value = colorMode.preference === 'system' ? colorMode.value : colorMode.preference

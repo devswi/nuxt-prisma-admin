@@ -1,4 +1,4 @@
-interface  Role {
+interface Role {
   id: string
   name: 'ADMIN' | 'USER'
   description?: string
@@ -13,7 +13,7 @@ interface User {
   roles: Role[]
 }
 
- interface Menu {
+interface Menu {
   id: string
   title: string
   icon: string
@@ -22,7 +22,6 @@ interface User {
 }
 
 declare global {
-
   export type {
     User,
     Role,

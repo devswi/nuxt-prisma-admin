@@ -1,6 +1,6 @@
 import prisma from './client'
 
-export async function getMenus (roles: Role[]) {
+export async function getMenus(roles: Role[]) {
   // get all menu_id from menu_role
   const roleMenus = await prisma.menu_role.findMany({
     where: {

@@ -34,38 +34,38 @@ const items = computed<NavigationItemWithState[]>(() => {
   })
 })
 
-function onEnter (el: Element, done: any) {
+function onEnter(el: Element, done: any) {
   const hel = el as HTMLElement
   hel.style.height = '0'
-  hel.style.height = el.scrollHeight + 'px'
+  hel.style.height = `${el.scrollHeight}px`
   hel.addEventListener('transitionend', done, { once: true })
 }
 
-function onBeforeLeave (el: Element) {
+function onBeforeLeave(el: Element) {
   const hel = el as HTMLElement
-  hel.style.height = hel.scrollHeight + 'px'
+  hel.style.height = `${hel.scrollHeight}px`
 }
 
-function onAfterEnter (el: Element) {
+function onAfterEnter(el: Element) {
   const hel = el as HTMLElement
   hel.style.height = 'auto'
 }
 
-function onLeave (el: Element, done: any) {
+function onLeave(el: Element, done: any) {
   const hel = el as HTMLElement
   hel.style.height = '0'
   hel.addEventListener('transitionend', done, { once: true })
 }
 
-const handleMenuClick = (item: NavigationItemWithState) => {
+function handleMenuClick(item: NavigationItemWithState) {
   if (item.children.length > 0) {
     // toggle open the accordion
-    if (openedItems.value.includes(item.id)) {
+    if (openedItems.value.includes(item.id))
       openedItems.value = openedItems.value.filter(id => id !== item.id)
-    } else {
+    else
       openedItems.value = props.multiple ? [...openedItems.value, item.id] : [item.id]
-    }
-  } else {
+  }
+  else {
     // clear the opened items
     openedItems.value = []
     // navigate to the route
@@ -94,7 +94,7 @@ const handleMenuClick = (item: NavigationItemWithState) => {
       <Transition
         v-bind="{
           enterActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
-          leaveActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out'
+          leaveActiveClass: 'overflow-hidden transition-[height] duration-200 ease-out',
         }"
         @enter="onEnter"
         @after-enter="onAfterEnter"

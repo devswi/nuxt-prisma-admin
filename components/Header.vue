@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const openGithub = () => {
+function openGithub() {
   navigateTo('https://github.com/shiwei93/nuxt-prisma-admin', {
     external: true,
     open: {
@@ -17,7 +17,7 @@ const openGithub = () => {
       <div class="w-[240px]">
         <ElInput placeholder="Type to search..." class="none-border">
           <template #prefix>
-            <Icon name="heroicons:magnifying-glass" class="w-4 h-4" />
+            <Icon name="heroicons:magnifying-glass" />
           </template>
         </ElInput>
       </div>

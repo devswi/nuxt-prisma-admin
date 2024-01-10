@@ -2,7 +2,6 @@
 import { useMenuStore } from '@/stores/menu'
 
 const menu = useMenuStore()
-
 </script>
 
 <template>

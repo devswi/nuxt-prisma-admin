@@ -11,10 +11,10 @@ export const useMenuStore = defineStore('menu', {
     }
   },
   actions: {
-    reset () {
+    reset() {
       this.menus = []
     },
-    async fetchMenus () {
+    async fetchMenus() {
       const { objects } = await $fetch<{ objects: Menu[] }>('/menus', {
         method: 'GET',
       })
